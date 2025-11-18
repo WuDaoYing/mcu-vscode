@@ -1,0 +1,158 @@
+{
+    "name": "mcu-vscode",
+    "displayName": "MCU_VSCODE 下载与调试器",
+    "description": "MCU 程序下载与调试工具，支持 OpenOCD 集成、ELF/SVD 文件查找，适配 ARM Cortex-M 系列等主流架构",
+    "version": "0.0.1",
+    "engines": {
+      "vscode": "^1.80.0"
+    },
+    "categories": [
+      "Other"
+    ],
+    "activationEvents": [
+      "onView:mcu-vscode.mainView",
+      "onCommand:mcu-vscode.selectElf",
+      "onCommand:mcu-vscode.selectDebugger",
+      "onCommand:mcu-vscode.selectMcuCore",
+      "onCommand:mcu-vscode.selectSvd",
+      "onCommand:mcu-vscode.debug",
+      "onCommand:mcu-vscode.download",
+      "onCommand:mcu-vscode.folderDebug",
+      "onCommand:mcu-vscode.folderDownload"
+    ],
+    "main": "./out/extension.js",
+    "contributes": {
+      "viewsContainers": {
+        "activitybar": [
+          {
+            "id": "mcu-vscode-container",
+            "title": "MCU 调试工具",
+            "icon": "media/icon.svg"
+          }
+        ]
+      },
+      "views": {
+        "mcu-vscode-container": [
+          {
+            "type": "webview",
+            "id": "mcu-vscode.mainView",
+            "name": "MCU 下载与调试"
+          }
+        ]
+      },
+      "commands": [
+        {
+          "command": "mcu-vscode.selectElf",
+          "title": "选择 ELF 文件"
+        },
+        {
+          "command": "mcu-vscode.selectDebugger",
+          "title": "选择调试器"
+        },
+        {
+          "command": "mcu-vscode.selectMcuCore",
+          "title": "选择 MCU 核心"
+        },
+        {
+          "command": "mcu-vscode.selectSvd",
+          "title": "选择 SVD 文件"
+        },
+        {
+          "command": "mcu-vscode.debug",
+          "title": "启动调试"
+        },
+        {
+          "command": "mcu-vscode.download",
+          "title": "下载程序"
+        },
+        {
+          "command": "mcu-vscode.folderDebug",
+          "title": "MCU 调试"
+        },
+        {
+          "command": "mcu-vscode.folderDownload",
+          "title": "MCU 下载"
+        }
+      ],
+      "menus": {
+        "explorer/context": [
+          {
+            "command": "mcu-vscode.folderDebug",
+            "group": "mcu-vscode@1"
+          },
+          {
+            "command": "mcu-vscode.folderDownload",
+            "group": "mcu-vscode@2"
+          }
+        ]
+      },
+      "configuration": {
+        "title": "MCU 调试工具配置",
+        "properties": {
+          "mcu-vscode.openocdPath": {
+            "type": "string",
+            "default": "",
+            "description": "OpenOCD 可执行文件路径（如未设置则自动搜索系统环境变量）"
+          },
+          "mcu-vscode.defaultMcuCore": {
+            "type": "string",
+            "default": "cortex-m4",
+            "description": "默认 MCU 核心类型（如 cortex-m0、cortex-m3 等）"
+          }
+        }
+      }
+    },
+    "scripts": {
+      "vscode:prepublish": "npm run compile",
+      "compile": "tsc -p ./",
+      "watch": "tsc -watch -p ./",
+      "pretest": "npm run compile && npm run lint",
+      "lint": "eslint src --ext ts",
+      "test": "node ./out/test/runTest.js"
+    },
+    "devDependencies": {
+      "@types/vscode": "^1.80.0",
+      "@types/glob": "^8.1.0",
+      "@types/mocha": "^10.0.1",
+      "@types/node": "20.2.5",
+      "eslint": "^8.41.0",
+      "@typescript-eslint/eslint-plugin": "^5.59.8",
+      "@typescript-eslint/parser": "^5.59.8",
+      "glob": "^8.1.0",
+      "mocha": "^10.2.0",
+      "typescript": "^5.1.3",
+      "@vscode/test-electron": "^2.3.2"
+    },
+    "dependencies": {
+      "vscode-webview-ui-toolkit": "^1.2.2"
+    },
+
+    "publisher": "yingwudao", 
+    "license": "MIT",
+    "files": [
+      "out/**/*.js",
+      "out/**/*.d.ts",
+      "media/**/*",
+      "node_modules/vscode-webview-ui-toolkit/**/*",
+      "package.json",
+      "README.md" 
+    ],
+    "keywords": [
+      "MCU",
+      "OpenOCD",
+      "调试",
+      "下载",
+      "ELF",
+      "SVD",
+      "Cortex-M",
+      "嵌入式"
+    ],
+    "icon": "media/icon-128.svg",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/你的账号/mcu-vscode.git" 
+    },
+    "bundledDependencies": [
+      "vscode-webview-ui-toolkit"
+    ]
+  }
